@@ -4,11 +4,11 @@ let monthNav = 0;
 let tasks = [];
 let prevMonthDays = 0;
 let dayNav = null;
-let hourNav = null;
 let eventNav = null;
 const calendar = document.querySelector(".main__calendar");
 const dateInput = document.querySelector("#date");
 const form = document.getElementById("form");
+const DATA_KEY = "data";
 
 const displayCurrentDate = () => {
   const date = new Date();
@@ -20,7 +20,6 @@ const displayCurrentDate = () => {
 
 const renderCalendar = () => {
   calendar.textContent = null;
-  console.log("render");
   const date = displayCurrentDate();
   if (monthNav !== 0) {
     date.setMonth(new Date().getMonth() + monthNav);
@@ -35,7 +34,6 @@ const renderCalendar = () => {
     "sunday",
   ];
 
-  const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -125,16 +123,23 @@ const submitTask = () => {
         document.querySelector(".error")?.remove();
         tasks.push({ title, date, startTime, endTime, type, description });
 
-        // document.getElementById("form").reset();
-        // displayCurrentDate();
-        drawTask();
+        document.getElementById("form").reset();
+        displayCurrentDate();
+        saveData();
         showWindow();
-        console.log(tasks);
+        drawTask();
       }
     }
   });
 };
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//Draw tasks method has bugs,
+//I'm guessing it's because I have nested loops and it draws the tasks wrongly
+//after receiving task array from local storage or deleting an item
+//After deleting an item other items disappear
+//And others appear after delete method
+//this process iterates till there is no values in an array
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const drawTask = () => {
   const daySquare = document.querySelectorAll(".main__calendar__day");
   const eventBox = document.createElement("div");
@@ -162,7 +167,9 @@ const drawTask = () => {
   });
   showEventDetails();
 };
-
+document
+  .querySelector(".main__calendar__day")
+  ?.addEventListener("click", () => {});
 const focusFormInputs = () => {
   const validationMsg = document.createElement("p");
   validationMsg.classList.add("alert");
@@ -291,7 +298,6 @@ const showEventDetails = () => {
             startTime: task.startTime,
             endTime: task.endTime,
           };
-          console.log(eventNav);
           detailsView.textContent = null;
           if (
             eventItem.value.date === task.date &&
@@ -345,14 +351,23 @@ const deleteItem = () => {
     if (taskNumber >= 0) {
       tasks.splice(taskNumber, 1);
     }
+    saveData();
     drawTask();
-    console.log(taskNumber);
-    console.log(tasks);
   });
 };
 const saveData = () => {
-  const DATE_KEY = "data";
+  sessionStorage.setItem(DATA_KEY, JSON.stringify(tasks));
 };
+const getLocalStorageData = () => {
+  window.addEventListener("DOMContentLoaded", () => {
+    const sessionData = sessionStorage.getItem(DATA_KEY);
+    if (sessionData) {
+      tasks = JSON.parse(sessionData);
+      drawTask();
+    }
+  });
+};
+getLocalStorageData();
 renderCalendar();
 changeMonth();
 setMinTimeValue();
