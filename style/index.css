@@ -218,6 +218,9 @@ html {
   background-color: var(--yellow);
 }
 @media only screen and (max-width: 1200px) {
+  html {
+    font-size: 56%;
+  }
   .header__date {
     left: 50%;
     top: 50%;
