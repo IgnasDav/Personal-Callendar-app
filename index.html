@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/index.css" />
+    <title>Personal Calender app</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__date"></h1>
+      <div class="header__buttons">
+        <button id="back"><</button>
+        <button id="next">></button>
+      </div>
+    </header>
+    <main class="main">
+      <div class="main__weekdays">
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+        <div>Sunday</div>
+      </div>
+      <div class="main__calendar"></div>
+      <div class="main__select">
+        <button id="createView-btn" class="btn">Create an Event</button>
+        <button id="detailsView-btn" class="btn">View Event</button>
+      </div>
+      <div class="main__createView hidden">
+        <form id="form">
+          <div id="titleDiv">
+            <label for="title">Title</label>
+            <input
+              required
+              type="text"
+              name="title"
+              id="title"
+              maxlength="50"
+            />
+          </div>
+          <div id="dateDiv">
+            <label for="date">Date</label>
+            <input required type="date" name="date" id="date" />
+          </div>
+          <div id="startTimeDiv">
+            <label for="startTime">Start time</label>
+            <input required type="time" name="startTime" id="startTime" />
+          </div>
+          <div id="endTimeDiv">
+            <label for="endTime">End time</label>
+            <input required type="time" name="endTime" id="endTime" />
+          </div>
+          <div id="typeDiv">
+            <label for="type">Type</label>
+            <select required name="type" id="type">
+              <option value="meeting">Meeting</option>
+              <option value="call">Call</option>
+              <option value="ooo">Out Of Office</option>
+            </select>
+          </div>
+          <div id="descriptionDiv">
+            <label for="description">Description</label>
+            <textarea name="description" id="description"></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="btn">Add event</button>
+        </form>
+      </div>
+      <div class="main__detailsView hidden"></div>
+    </main>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>

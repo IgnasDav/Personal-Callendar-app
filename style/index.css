@@ -1,0 +1,219 @@
+:root {
+  --gray: #dee2e6;
+  --darkGray-2: #ced4da;
+  --black: #000;
+  --blue: #007bff;
+  --green: #42ba96;
+  --yellow: #ffc107;
+  --red: red;
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+.header {
+  position: relative;
+  padding-top: 5rem;
+}
+.header__date {
+  position: absolute;
+  font-weight: 400;
+  left: 30%;
+}
+.header__buttons {
+  position: absolute;
+  left: 60%;
+  top: 5rem;
+}
+.header__buttons button {
+  font-size: 1.8rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--blue);
+  transition: all 0.3s;
+}
+.header__buttons button:hover {
+  opacity: 0.7;
+}
+.main {
+  display: grid;
+  padding: 5rem;
+  grid-template-columns: calc(100% / 3 * 2) calc(100% / 3 * 1);
+}
+.main__calendar {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+}
+.main__weekdays,
+.main__calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+.main__weekdays {
+  font-size: 1.8rem;
+  width: 100%;
+}
+.main__weekdays div {
+  border: 1px solid var(--gray);
+  grid-row: 1 / 2;
+  text-align: center;
+}
+.main__calendar__day {
+  border: 1px solid var(--gray);
+  width: 100%;
+  min-height: 10rem;
+  transition: all 0.3s;
+}
+.main__calendar__day:hover {
+  background-color: var(--darkGray-2);
+}
+.main__calendar__day__event {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+  transition: all 0.3;
+  margin-bottom: 0.5rem;
+}
+.main__calendar__day__event:nth-of-type(1) {
+  margin-top: 1rem;
+}
+.main__calendar__day__event:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.main__calendar__day__event__text {
+  text-transform: uppercase;
+}
+.main__select {
+  display: flex;
+  justify-content: center;
+}
+.main__createView,
+.main__select,
+.main__detailsView {
+  margin-left: 4rem;
+}
+.main__createView,
+.main__detailsView {
+  grid-row: 2 / 3;
+  grid-column: 2 / 4;
+}
+.main__detailsView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 2rem;
+}
+.main__detailsView p {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.main__detailsView__box {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.btn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 0.5rem;
+  border-radius: 5rem;
+  border: none;
+  background-color: var(--blue);
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+.btn:hover {
+  opacity: 0.7;
+}
+.btn--delete {
+  padding: 0;
+  border-radius: 0;
+  background-color: var(--red);
+}
+#form div {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#form div input:focus,
+#form div select:focus {
+  border: 1px solid var(--lightBlue);
+}
+#form div input,
+#form div select {
+  border: 1px solid var(--black);
+  height: 5rem;
+  border-radius: 5rem;
+  padding: 1rem;
+  font-size: 1.8rem;
+  min-width: 36rem;
+}
+#form div #description {
+  height: 10rem;
+  font-size: 1.8rem;
+}
+#form div label {
+  padding-bottom: 0.5rem;
+}
+
+#form {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+#submitBtn:hover {
+  opacity: 0.7;
+}
+#createView-btn,
+#detailsView-btn {
+  border-radius: 0;
+}
+#createView-btn {
+  background-color: var(--green);
+}
+.error {
+  color: var(--red);
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.alert {
+  color: var(--red);
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+.highlighted {
+  background-color: var(--darkGray-2);
+}
+.hidden {
+  display: none;
+}
+.prevMonthDay {
+  border: none;
+}
+
+#call {
+  background-color: var(--green);
+}
+#meeting {
+  background-color: var(--blue);
+}
+#ooo {
+  background-color: var(--yellow);
+}
