@@ -123,7 +123,7 @@ const submitTask = () => {
         document.querySelector(".error")?.remove();
         tasks.push({ title, date, startTime, endTime, type, description });
 
-        document.getElementById("form").reset();
+        // document.getElementById("form").reset();
         displayCurrentDate();
         saveData();
         showWindow();
@@ -132,23 +132,18 @@ const submitTask = () => {
     }
   });
 };
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//Draw tasks method has bugs,
-//I'm guessing it's because I have nested loops and it draws the tasks wrongly
-//after receiving task array from local storage or deleting an item
-//After deleting an item other items disappear
-//And others appear after delete method
-//this process iterates till there is no values in an array
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 const drawTask = () => {
   const daySquare = document.querySelectorAll(".main__calendar__day");
-  const eventBox = document.createElement("div");
-  const eventBoxTitle = document.createElement("p");
-  eventBox.classList.add("main__calendar__day__event");
-  eventBoxTitle.classList.add("main__calendar__day__event__text");
+  console.log(tasks);
   tasks.forEach((item) => {
     daySquare.forEach((square) => {
+      console.log(item.date, square.id);
       if (item.date === square.id) {
+        const eventBox = document.createElement("div");
+        const eventBoxTitle = document.createElement("p");
+        eventBox.classList.add("main__calendar__day__event");
+        eventBoxTitle.classList.add("main__calendar__day__event__text");
         eventBoxTitle.textContent = item.title;
         eventBox.append(eventBoxTitle);
         eventBox.value = { startTime: item.startTime, date: item.date };
@@ -350,6 +345,7 @@ const deleteItem = () => {
       });
     if (taskNumber >= 0) {
       tasks.splice(taskNumber, 1);
+      console.log(tasks);
     }
     saveData();
     drawTask();
