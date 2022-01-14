@@ -123,7 +123,7 @@ const submitTask = () => {
         document.querySelector(".error")?.remove();
         tasks.push({ title, date, startTime, endTime, type, description });
 
-        // document.getElementById("form").reset();
+        document.getElementById("form").reset();
         displayCurrentDate();
         saveData();
         showWindow();
@@ -132,7 +132,6 @@ const submitTask = () => {
     }
   });
 };
-
 const drawTask = () => {
   const daySquare = document.querySelectorAll(".main__calendar__day");
   console.log(tasks);
