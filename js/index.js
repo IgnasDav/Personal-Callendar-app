@@ -76,10 +76,14 @@ const changeMonth = () => {
   document.getElementById("back").addEventListener("click", () => {
     --monthNav;
     renderCalendar();
+    drawTask();
+    showEventDetails();
   });
   document.getElementById("next").addEventListener("click", () => {
     ++monthNav;
     renderCalendar();
+    drawTask();
+    showEventDetails();
   });
 };
 
@@ -124,7 +128,6 @@ const submitTask = () => {
         tasks.push({ title, date, startTime, endTime, type, description });
 
         document.getElementById("form").reset();
-        displayCurrentDate();
         saveData();
         showWindow();
         drawTask();
@@ -133,14 +136,13 @@ const submitTask = () => {
   });
 };
 const drawTask = () => {
+  removeTask();
   const daySquare = document.querySelectorAll(".main__calendar__day");
-  console.log(tasks);
   tasks.forEach((item) => {
-    daySquare.forEach((square) => {
-      console.log(item.date, square.id);
+    daySquare.forEach((square, i) => {
+      const eventBox = document.createElement("div");
+      const eventBoxTitle = document.createElement("p");
       if (item.date === square.id) {
-        const eventBox = document.createElement("div");
-        const eventBoxTitle = document.createElement("p");
         eventBox.classList.add("main__calendar__day__event");
         eventBoxTitle.classList.add("main__calendar__day__event__text");
         eventBoxTitle.textContent = item.title;
@@ -155,6 +157,7 @@ const drawTask = () => {
         if (item.type === "ooo") {
           eventBox.id = "ooo";
         }
+
         square.append(eventBox);
       }
     });
@@ -344,7 +347,6 @@ const deleteItem = () => {
       });
     if (taskNumber >= 0) {
       tasks.splice(taskNumber, 1);
-      console.log(tasks);
     }
     saveData();
     drawTask();
@@ -359,6 +361,16 @@ const getLocalStorageData = () => {
     if (sessionData) {
       tasks = JSON.parse(sessionData);
       drawTask();
+    }
+  });
+};
+const removeTask = () => {
+  document.querySelectorAll(".main__calendar__day__event").forEach((event) => {
+    if (
+      event.value.startTime === event.value.startTime &&
+      event.value.date === event.value.date
+    ) {
+      event.remove();
     }
   });
 };
